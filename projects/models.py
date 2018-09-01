@@ -1,31 +1,30 @@
 from django.contrib.auth.models import User
 from django.db import models
-from markdownx.models import MarkdownxField
 
 
-class PostManager(models.Manager):
+class ProjectManager(models.Manager):
     def get_queryset(self):
-        return super(PostManager, self).get_queryset().filter(published=True)
+        return super(ProjectManager, self).get_queryset().filter(is_published=True)
 
 
-class Post(models.Model):
-    title = models.CharField(max_length=255)
+class Project(models.Model):
+    name = models.CharField(max_length=255)
 
     summary = models.CharField(max_length=255, blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
+    date_created = models.DateTimeField(auto_now_add=True)
 
-    # markdown text, API will serve this as HTML!
-    text = MarkdownxField()
+    url_name = models.CharField(max_length=50, default='Website')
+    url = models.URLField()
 
     # API will not serve the post unless published is set to True
-    published = models.BooleanField(default=False)
-    published_at = models.DateTimeField(blank=True)
+    is_published = models.BooleanField(default=False)
+    date_published = models.DateTimeField(blank=True)
 
     objects = models.Manager()
-    visible = PostManager()
+    visible = ProjectManager()
 
     def __str__(self):
-        return self.title if self.published else self.title + " (draft)"
+        return self.name if self.is_published else  "[DRAFT] " + self.name
 
     class Meta:
-        ordering = ['-published_at', '-created_at', ]
+        ordering = ['-is_published', '-date_published', '-date_created', ]

@@ -3,19 +3,22 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.views.static import serve
 
-from rest_framework import routers
+from rest_framework.routers import SimpleRouter
 
 from blog import views as bv
 from projects import views as pv
-from about import views as av
 
 app_name = "omaralbeik"
 
-router = routers.SimpleRouter()
+class OptionalSlashRouter(SimpleRouter):
+    def __init__(self):
+        self.trailing_slash = '/?'
+        super(SimpleRouter, self).__init__()
 
+
+router = OptionalSlashRouter()
 router.register(r'blog', bv.PostViewSet)
 router.register(r'projects', pv.ProjectViewSet)
-router.register(r'about', av.AboutSlideViewSet)
 
 urlpatterns = [
     url(r'^markdownx/', include('markdownx.urls')),
