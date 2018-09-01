@@ -14,7 +14,7 @@ class Post(models.Model):
     slug = models.SlugField(max_length=255, unique=True)
 
     summary = models.CharField(max_length=255, blank=True)
-    date_created = models.DateTimeField(auto_now_add=True)
+    date_created = models.DateField(auto_now_add=True)
 
     # markdown text, API will serve this as HTML!
     text = MarkdownxField()

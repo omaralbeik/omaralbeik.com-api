@@ -10,7 +10,7 @@ class Project(models.Model):
     name = models.CharField(max_length=255)
 
     summary = models.CharField(max_length=255, blank=True)
-    date_created = models.DateTimeField(auto_now_add=True)
+    date_created = models.DateField(auto_now_add=True)
 
     url_name = models.CharField(max_length=50, default='Website')
     url = models.URLField()
