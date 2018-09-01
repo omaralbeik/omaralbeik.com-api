@@ -25,7 +25,6 @@ router.register(r'static', sv.StaticViewSet)
 urlpatterns = [
     url(r'^markdownx/', include('markdownx.urls')),
     url(r'^admin/', admin.site.urls),
-    url(r'^api/v1/auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/v1/', include(router.urls)),
 ]
 
