@@ -7,6 +7,7 @@ from rest_framework.routers import SimpleRouter
 
 from blog import views as bv
 from projects import views as pv
+from static import views as sv
 
 app_name = "omaralbeik"
 
@@ -19,6 +20,7 @@ class OptionalSlashRouter(SimpleRouter):
 router = OptionalSlashRouter()
 router.register(r'blog', bv.PostViewSet)
 router.register(r'projects', pv.ProjectViewSet)
+router.register(r'static', sv.StaticViewSet)
 
 urlpatterns = [
     url(r'^markdownx/', include('markdownx.urls')),
