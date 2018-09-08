@@ -13,6 +13,7 @@ class PostSerializer(serializers.ModelSerializer):
             'id',
             'title',
             'slug',
+            'cover_image_url',
             'summary',
             'text',
             'html_text',
@@ -22,4 +23,4 @@ class PostSerializer(serializers.ModelSerializer):
 
     # return post's text as HTML
     def get_html_text(self, post):
-        return markdown2.markdown(post.text, extras=['target-blank-links', 'fenced-code-blocks',])
+        return markdown2.markdown(post.text, extras=['target-blank-links', 'fenced-code-blocks', ])

@@ -1,8 +1,6 @@
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
-from rest_framework import viewsets
-from rest_framework import permissions
-
+from rest_framework import viewsets, permissions
 from . import models, serializers
 
 
@@ -17,17 +15,16 @@ class PostViewSet(viewsets.ModelViewSet):
         else:
             return models.Post.visible.all()
 
-
     def retrieve(self, request, pk=None):
         queryset = self.queryset
 
-        try: # retrieve post by primary key
+        try:  # retrieve post by primary key
             pk = int(pk)
             post = get_object_or_404(self.get_queryset(), pk=pk)
             serializer = self.get_serializer(post)
             return Response(serializer.data)
 
-        except: # retrieve post by slug
+        except:  # retrieve post by slug
             post = get_object_or_404(self.get_queryset().filter(slug=pk))
             serializer = self.get_serializer(post)
             return Response(serializer.data)

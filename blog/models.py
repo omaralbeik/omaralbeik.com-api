@@ -9,25 +9,19 @@ class PostManager(models.Manager):
 
 class Post(models.Model):
     title = models.CharField(max_length=255)
-
-    # used for url names
     slug = models.SlugField(max_length=255, unique=True)
-
-    summary = models.CharField(max_length=255, blank=True)
+    cover_image_url = models.URLField(blank=True)
+    summary = models.TextField(max_length=255, blank=True)
     date_created = models.DateField(auto_now_add=True)
-
-    # markdown text, API will serve this as HTML!
     text = MarkdownxField()
-
-    # API will not serve the post unless published is set to True
     is_published = models.BooleanField(default=False)
-    date_published = models.DateTimeField(blank=True)
+    date_published = models.DateField(blank=True)
 
     objects = models.Manager()
     visible = PostManager()
 
     def __str__(self):
-        return self.title if self.is_published else  "[DRAFT] " + self.title
+        return self.title if self.is_published else "[DRAFT] " + self.title
 
     class Meta:
         ordering = ['-is_published', '-date_published', '-date_created', ]

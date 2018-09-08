@@ -10,6 +10,8 @@ class ProjectSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'name',
+            'slug',
+            'logo_url',
             'summary',
             'is_published',
             'date_published',
