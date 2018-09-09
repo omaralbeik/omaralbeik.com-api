@@ -15,7 +15,7 @@ class Post(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     text = MarkdownxField()
     is_published = models.BooleanField(default=False)
-    date_published = models.DateField(blank=True)
+    date_published = models.DateTimeField(blank=True)
 
     objects = models.Manager()
     visible = PostManager()
