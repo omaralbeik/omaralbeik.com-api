@@ -26,7 +26,7 @@ router.register(r'contents', cv.ContentViewSet)
 urlpatterns = [
     url(r'^markdownx/', include('markdownx.urls')),
     url(r'^admin/', admin.site.urls),
-    url(r'^api/v1/', include(router.urls)),
+    url(r'^v1/', include(router.urls)),
 ]
 
 # Django should not serve media files in production,
