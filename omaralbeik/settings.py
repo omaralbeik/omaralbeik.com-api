@@ -1,18 +1,18 @@
-import os
+from . import server_variables as sv
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = sv.BASE_DIR
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'q%c%v43gc!v689p3&k8ej(ftxh#(x-(u)8n=ps#g1m137x2=-$'
+SECRET_KEY = sv.SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = sv.DEBUG
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]']
+ALLOWED_HOSTS = sv.ALLOWED_HOSTS
 
 APPEND_SLASH = True
 
@@ -68,12 +68,7 @@ WSGI_APPLICATION = 'omaralbeik.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+DATABASES = sv.DATABASES
 
 
 # Password validation
@@ -105,12 +100,16 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
-STATIC_URL = '/static/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+STATIC_URL = sv.STATIC_URL
+STATIC_ROOT = sv.STATIC_ROOT
+
+# Media files
+MEDIA_URL = sv.MEDIA_URL
+MEDIA_ROOT = sv.MEDIA_ROOT
 
 # CORS Origin
-CORS_ORIGIN_ALLOW_ALL = True
-
+CORS_ORIGIN_ALLOW_ALL = sv.CORS_ORIGIN_ALLOW_ALL
+CORS_ALLOW_METHODS = sv.CORS_ALLOW_METHODS
 
 # Django REST Framework
 REST_FRAMEWORK = {
@@ -121,7 +120,7 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 10,
+    'PAGE_SIZE': 20,
     'DEFAULT_THROTTLE_CLASSES': (
         'rest_framework.throttling.AnonRateThrottle',
         'rest_framework.throttling.UserRateThrottle',
