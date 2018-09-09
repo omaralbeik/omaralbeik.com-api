@@ -12,7 +12,7 @@ class Post(models.Model):
     slug = models.SlugField(max_length=255, unique=True)
     cover_image_url = models.URLField(blank=True)
     summary = models.TextField(max_length=255, blank=True)
-    date_created = models.DateField(auto_now_add=True)
+    date_created = models.DateTimeField(auto_now_add=True)
     text = MarkdownxField()
     is_published = models.BooleanField(default=False)
     date_published = models.DateField(blank=True)
