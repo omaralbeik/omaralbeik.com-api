@@ -1,6 +1,5 @@
 from rest_framework import serializers
 import markdown2
-
 from .models import Post
 
 
