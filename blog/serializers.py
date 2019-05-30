@@ -13,6 +13,7 @@ class PostSerializer(serializers.ModelSerializer):
             'title',
             'slug',
             'cover_image_url',
+            'cover_image_credit_badge',
             'summary',
             'text',
             'html_text',

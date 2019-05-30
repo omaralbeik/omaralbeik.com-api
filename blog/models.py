@@ -11,6 +11,7 @@ class Post(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, unique=True)
     cover_image_url = models.URLField(blank=True)
+    cover_image_credit_badge = models.TextField(blank=True)
     summary = models.TextField(max_length=255, blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
     text = MarkdownxField()
