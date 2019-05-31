@@ -17,5 +17,4 @@ class ProjectSerializer(serializers.ModelSerializer):
             'date_published',
             'url_name',
             'url',
-            'tags'
         )

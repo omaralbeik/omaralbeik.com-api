@@ -18,8 +18,7 @@ class PostSerializer(serializers.ModelSerializer):
             'text',
             'html_text',
             'is_published',
-            'date_published',
-            'tags'
+            'date_published'
         )
 
     # return post's text as HTML
