@@ -1,0 +1,17 @@
+.markdownx {
+  display: flex !important;
+  flex-direction: row;
+}
+.markdownx-editor {
+  padding: 10px;
+  flex: 1 1 0;
+  min-height: 400px;
+}
+.markdownx-editor:focus {
+  outline: none;
+}
+.markdownx-preview {
+  padding: 10px;
+  flex: 1 1 0;
+  border: 1px solid #ccc;
+}
