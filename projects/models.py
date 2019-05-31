@@ -1,4 +1,5 @@
 from django.db import models
+from taggit.managers import TaggableManager
 
 
 class ProjectManager(models.Manager):
@@ -16,6 +17,7 @@ class Project(models.Model):
     url = models.URLField()
     is_published = models.BooleanField(default=False)
     date_published = models.DateField(blank=True)
+    tags = TaggableManager(blank=True)
 
     objects = models.Manager()
     visible = ProjectManager()

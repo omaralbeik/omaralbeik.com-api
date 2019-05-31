@@ -1,5 +1,6 @@
 from django.db import models
 from markdownx.models import MarkdownxField
+from taggit.managers import TaggableManager
 
 
 class PostManager(models.Manager):
@@ -17,6 +18,7 @@ class Post(models.Model):
     text = MarkdownxField()
     is_published = models.BooleanField(default=False)
     date_published = models.DateTimeField(blank=True)
+    tags = TaggableManager(blank=True)
 
     objects = models.Manager()
     visible = PostManager()
