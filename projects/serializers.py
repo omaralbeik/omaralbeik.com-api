@@ -4,6 +4,7 @@ from .models import Project
 
 
 class ProjectSerializer(serializers.ModelSerializer):
+    tags = serializers.SerializerMethodField()
 
     class Meta:
         model = Project
@@ -17,4 +18,9 @@ class ProjectSerializer(serializers.ModelSerializer):
             'date_published',
             'url_name',
             'url',
+            'tags'
         )
+
+    # return project's tags.
+    def get_tags(self, post):
+        return post.tags.all().values('name', 'slug')
