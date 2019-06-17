@@ -21,6 +21,7 @@ class OptionalSlashRouter(SimpleRouter):
 router = OptionalSlashRouter()
 router.register(r'blog', bv.PostViewSet)
 router.register(r'projects', pv.ProjectViewSet)
+router.register(r'technologies', pv.TechnologyViewSet)
 router.register(r'contents', cv.ContentViewSet)
 
 urlpatterns = [
