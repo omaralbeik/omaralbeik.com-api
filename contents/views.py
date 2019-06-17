@@ -9,8 +9,6 @@ class ContentViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.ContentSerializer
 
     def retrieve(self, request, pk=None):
-        queryset = self.queryset
-
         try: # retrieve post by primary key
             pk = int(pk)
             content = get_object_or_404(self.get_queryset(), pk=pk)

@@ -9,6 +9,13 @@ class PostViewSet(viewsets.ModelViewSet):
     queryset = models.Post.objects.all()
     serializer_class = serializers.PostSerializer
 
+    def get_post(self, request, pk=None):
+        try: # retrieve post by primary key
+            pk = int(pk)
+            return get_object_or_404(self.get_queryset(), pk=pk)
+        except: # retrieve post by slug
+            return get_object_or_404(self.get_queryset().filter(slug=pk))
+
     def get_queryset(self):
         if self.request.auth:
             return models.Post.objects.all()
@@ -16,15 +23,6 @@ class PostViewSet(viewsets.ModelViewSet):
             return models.Post.visible.all()
 
     def retrieve(self, request, pk=None):
-        queryset = self.queryset
-
-        try:  # retrieve post by primary key
-            pk = int(pk)
-            post = get_object_or_404(self.get_queryset(), pk=pk)
-            serializer = self.get_serializer(post)
-            return Response(serializer.data)
-
-        except:  # retrieve post by slug
-            post = get_object_or_404(self.get_queryset().filter(slug=pk))
-            serializer = self.get_serializer(post)
-            return Response(serializer.data)
+        post = self.get_post(request, pk)
+        serializer = self.get_serializer(post)
+        return Response(serializer.data)
