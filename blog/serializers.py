@@ -16,9 +16,7 @@ class PostSerializer(serializers.ModelSerializer):
             'cover_image_url',
             'cover_image_credit_badge',
             'summary',
-            'text',
             'html_text',
-            'is_published',
             'date_published',
             'tags'
         )
