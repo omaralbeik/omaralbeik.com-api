@@ -4,9 +4,9 @@ from .models import Post
 
 
 @admin.register(Post)
-class CustomerAdmin(MarkdownxModelAdmin):
-  
+class BlogAdmin(MarkdownxModelAdmin):
+
   class Media:
     css = {
-      'all': ('markdownx.css')
+      'all': ('markdownx.css', )
     }

@@ -6,7 +6,7 @@ from . import models, serializers
 
 
 class SnippetViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
     queryset = models.Snippet.objects.all()
     serializer_class = serializers.SnippetSerializer
 
@@ -24,7 +24,7 @@ class SnippetViewSet(viewsets.ModelViewSet):
 
 
 class ProgrammingLanguageViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
     queryset = models.ProgrammingLanguage.objects.all()
     serializer_class = serializers.ProgrammingLanguageSerializer
 

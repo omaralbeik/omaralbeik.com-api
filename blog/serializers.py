@@ -23,7 +23,7 @@ class PostSerializer(serializers.ModelSerializer):
 
     # return post's text as HTML
     def get_html_text(self, post):
-        return markdown2.markdown(post.text, extras=['target-blank-links', 'fenced-code-blocks', ])
+        return markdown2.markdown(post.text, extras=['target-blank-links', 'fenced-code-blocks'])
 
     # return post's tags.
     def get_tags(self, post):

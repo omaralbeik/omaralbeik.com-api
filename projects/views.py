@@ -6,7 +6,7 @@ from . import models, serializers
 
 
 class TechnologyViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
     queryset = models.Technology.objects.all()
     serializer_class = serializers.TechnologySerializer
 
@@ -34,7 +34,7 @@ class TechnologyViewSet(viewsets.ModelViewSet):
 
 
 class ProjectViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
     queryset = models.Project.objects.all()
     serializer_class = serializers.ProjectSerializer
 

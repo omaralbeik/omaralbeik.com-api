@@ -7,5 +7,5 @@ from .models import Content
 class ContentAdmin(MarkdownxModelAdmin):
   class Media:
     css = {
-      'all': ('markdownx.css')
+      'all': ('markdownx.css', )
     }
