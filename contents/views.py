@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework import viewsets, permissions
 from . import models, serializers
 
+
 class ContentViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = models.Content.objects.all()
