@@ -11,7 +11,7 @@ from snippets import views as sv
 from contents import views as cv
 
 app_name = "omaralbeik"
-
+prod_url = "https://omaralbeik.com"
 
 class OptionalSlashRouter(SimpleRouter):
     def __init__(self):

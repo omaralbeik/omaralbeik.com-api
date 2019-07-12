@@ -17,6 +17,12 @@ class SnippetViewSet(viewsets.ModelViewSet):
         except: # retrieve snippet by slug
             return get_object_or_404(self.get_queryset().filter(slug=pk))
 
+    def get_queryset(self):
+        if self.request.auth:
+            return models.Snippet.objects.all()
+        else:
+            return models.Snippet.visible.all()
+
     def retrieve(self, request, pk=None):
         snippet = self.get_snippet(request, pk)
         serializer = self.get_serializer(snippet)
