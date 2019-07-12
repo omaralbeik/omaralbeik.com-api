@@ -28,8 +28,9 @@ class TechnologyViewSet(viewsets.ModelViewSet):
     def projects(self, request, pk=None):
         technology = self.get_technology(request, pk)
         porjects = models.Project.visible.filter(technologies__in=[technology])
-        serializer = serializers.ProjectSerializer(porjects, many=True)
-        return Response(serializer.data)
+        page = self.paginate_queryset(porjects)
+        serializer = serializers.ProjectSerializer(page, many=True)
+        return self.get_paginated_response(serializer.data)
 
 
 class ProjectViewSet(viewsets.ModelViewSet):
