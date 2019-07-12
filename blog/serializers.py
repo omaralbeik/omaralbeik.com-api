@@ -1,11 +1,13 @@
 from rest_framework import serializers
 import markdown2
 from .models import Post
+from omaralbeik import urls
 
 
 class PostSerializer(serializers.ModelSerializer):
     html_text = serializers.SerializerMethodField()
     tags = serializers.SerializerMethodField()
+    website_url = serializers.SerializerMethodField()
 
     class Meta:
         model = Post
@@ -18,8 +20,13 @@ class PostSerializer(serializers.ModelSerializer):
             'summary',
             'html_text',
             'date_published',
-            'tags'
+            'website_url',
+            'tags',
         )
+
+    # return post's web URL.
+    def get_website_url(self, post):
+        return "{}/blog/{}".format(urls.prod_url, post.slug)
 
     # return post's text as HTML
     def get_html_text(self, post):

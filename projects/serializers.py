@@ -31,7 +31,7 @@ class ProjectSerializer(serializers.ModelSerializer):
             'url_name',
             'url',
             'tags',
-            'technologies'
+            'technologies',
         )
 
     # return project's tags.

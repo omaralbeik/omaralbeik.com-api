@@ -4,7 +4,7 @@ from .models import ProgrammingLanguage, Snippet
 
 
 class ProgrammingLanguageSerializer(serializers.ModelSerializer):
-    
+
     class Meta:
         model = ProgrammingLanguage
         fields = (
@@ -28,7 +28,7 @@ class SnippetSerializer(serializers.ModelSerializer):
             'summary',
             'html_text',
             'date_published',
-            'language'
+            'language',
         )
 
     # return snippet as HTML
