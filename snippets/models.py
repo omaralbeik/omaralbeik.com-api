@@ -1,36 +1,34 @@
 from django.db import models
-from taggit.managers import TaggableManager
+from markdownx.models import MarkdownxField
 
 
-class ProjectManager(models.Manager):
+class SnippetManager(models.Manager):
     def get_queryset(self):
-        return super(ProjectManager, self).get_queryset().filter(is_published=True)
+        return super(SnippetManager, self).get_queryset().filter(is_published=True)
 
 
-class Technology(models.Model):
+class ProgrammingLanguage(models.Model):
     name = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, unique=True)
     icon_url = models.URLField(blank=True, null=True)
 
     def __str__(self):
-        return "{} ({})".format(self.name, self.slug)
+        return self.name
 
 
-class Project(models.Model):
+class Snippet(models.Model):
     name = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, unique=True)
-    logo_url = models.URLField(blank=True, null=True)
     summary = models.TextField(max_length=255, blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
-    url_name = models.CharField(max_length=50, default='Website')
-    url = models.URLField()
+    text = MarkdownxField()
     is_published = models.BooleanField(default=False)
     date_published = models.DateField(blank=True, null=True)
-    technologies = models.ManyToManyField(Technology, blank=True)
-    tags = TaggableManager(blank=True)
+
+    language = models.ForeignKey('ProgrammingLanguage', on_delete=models.CASCADE)
 
     objects = models.Manager()
-    visible = ProjectManager()
+    visible = SnippetManager()
 
     def __str__(self):
         return self.name if self.is_published else "[DRAFT] " + self.name

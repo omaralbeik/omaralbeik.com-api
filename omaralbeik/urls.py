@@ -7,6 +7,7 @@ from rest_framework.routers import SimpleRouter
 
 from blog import views as bv
 from projects import views as pv
+from snippets import views as sv
 from contents import views as cv
 
 app_name = "omaralbeik"
@@ -22,6 +23,8 @@ router = OptionalSlashRouter()
 router.register(r'blog', bv.PostViewSet)
 router.register(r'projects', pv.ProjectViewSet)
 router.register(r'technologies', pv.TechnologyViewSet)
+router.register(r'snippets', sv.SnippetViewSet)
+router.register(r'languages', sv.ProgrammingLanguageViewSet)
 router.register(r'contents', cv.ContentViewSet)
 
 urlpatterns = [
