@@ -8,5 +8,5 @@ admin.site.register(ProgrammingLanguage)
 class SnippetsAdmin(MarkdownxModelAdmin):
   class Media:
     css = {
-      'all': ('markdownx.css')
+      'all': ('markdownx.css', )
     }

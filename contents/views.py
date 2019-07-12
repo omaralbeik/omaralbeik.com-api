@@ -5,7 +5,7 @@ from . import models, serializers
 
 
 class ContentViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
     queryset = models.Content.objects.all()
     serializer_class = serializers.ContentSerializer
 
