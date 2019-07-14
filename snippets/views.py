@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from rest_framework import viewsets, permissions
 from rest_framework.decorators import detail_route
+from rest_framework.filters import SearchFilter
 from . import models, serializers
 
 
@@ -9,6 +10,8 @@ class SnippetViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
     queryset = models.Snippet.objects.all()
     serializer_class = serializers.SnippetSerializer
+    filter_backends = (SearchFilter, )
+    search_fields = ('name', 'summary', 'text')
 
     def get_snippet(self, request, pk=None):
         try: # retrieve snippet by primary key
@@ -33,6 +36,8 @@ class ProgrammingLanguageViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
     queryset = models.ProgrammingLanguage.objects.all()
     serializer_class = serializers.ProgrammingLanguageSerializer
+    filter_backends = (SearchFilter, )
+    search_fields = ('name', )
 
     def get_language(self, request, pk=None):
         try: # retrieve language by primary key

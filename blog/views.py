@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from rest_framework import viewsets, permissions
+from rest_framework.filters import SearchFilter
 from . import models, serializers
 
 
@@ -8,6 +9,8 @@ class PostViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
     queryset = models.Post.objects.all()
     serializer_class = serializers.PostSerializer
+    filter_backends = (SearchFilter, )
+    search_fields = ('title', 'summary', 'text', )
 
     def get_post(self, request, pk=None):
         try: # retrieve post by primary key

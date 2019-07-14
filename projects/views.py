@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from rest_framework import viewsets, permissions
 from rest_framework.decorators import detail_route
+from rest_framework.filters import SearchFilter
 from . import models, serializers
 
 
@@ -9,6 +10,8 @@ class TechnologyViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
     queryset = models.Technology.objects.all()
     serializer_class = serializers.TechnologySerializer
+    filter_backends = (SearchFilter, )
+    search_fields = ('name', )
 
     def get_technology(self, request, pk=None):
         try: # retrieve technology by primary key
@@ -37,6 +40,8 @@ class ProjectViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
     queryset = models.Project.objects.all()
     serializer_class = serializers.ProjectSerializer
+    filter_backends = (SearchFilter, )
+    search_fields = ('name', 'summary', )
 
     def get_project(self, request, pk=None):
         try: # retrieve project by primary key
