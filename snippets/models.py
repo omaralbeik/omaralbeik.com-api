@@ -31,7 +31,8 @@ class Snippet(models.Model):
     visible = SnippetManager()
 
     def __str__(self):
-        return self.name if self.is_published else "[DRAFT] " + self.name
+        desc = self.name if self.is_published else "[DRAFT] " + self.name
+        return "{} ({})".format(desc, self.language.name)
 
     class Meta:
         ordering = ['-is_published', '-date_published', '-date_created']
