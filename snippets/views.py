@@ -11,7 +11,7 @@ class SnippetViewSet(viewsets.ModelViewSet):
     queryset = models.Snippet.objects.all()
     serializer_class = serializers.SnippetSerializer
     filter_backends = (SearchFilter, )
-    search_fields = ('name', 'summary', 'text')
+    search_fields = ('name', 'summary', 'text', 'language__name', )
 
     def get_snippet(self, request, pk=None):
         try: # retrieve snippet by primary key
