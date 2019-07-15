@@ -127,9 +127,12 @@ REST_FRAMEWORK = {
         'rest_framework.throttling.AnonRateThrottle',
         'rest_framework.throttling.UserRateThrottle',
     ),
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    ),
     'DEFAULT_THROTTLE_RATES': {
-        'anon': '5000/day',
-        'user': '10000/hour',
+        'anon': '500/day',
+        'user': '1000/hour',
     }
 }
 
