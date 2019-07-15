@@ -10,7 +10,7 @@ class PostViewSet(viewsets.ModelViewSet):
     queryset = models.Post.objects.all()
     serializer_class = serializers.PostSerializer
     filter_backends = (SearchFilter, )
-    search_fields = ('title', 'summary', 'text', )
+    search_fields = ('title', 'summary', 'text', 'tags__name', )
 
     def get_post(self, request, pk=None):
         try: # retrieve post by primary key

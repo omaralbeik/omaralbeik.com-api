@@ -41,7 +41,7 @@ class ProjectViewSet(viewsets.ModelViewSet):
     queryset = models.Project.objects.all()
     serializer_class = serializers.ProjectSerializer
     filter_backends = (SearchFilter, )
-    search_fields = ('name', 'summary', )
+    search_fields = ('name', 'summary', 'url_name', 'url', 'technologies__name', 'tags__name', )
 
     def get_project(self, request, pk=None):
         try: # retrieve project by primary key
