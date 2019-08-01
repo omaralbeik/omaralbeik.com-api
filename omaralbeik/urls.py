@@ -14,6 +14,10 @@ from contact import views as ctv
 app_name = "omaralbeik"
 prod_url = "https://omaralbeik.com"
 
+admin.sites.AdminSite.site_header = "Omar Albeik | Admin"
+admin.sites.AdminSite.site_title = "Omar Albeik"
+admin.sites.AdminSite.index_title = "Site Administration"
+admin.sites.AdminSite.site_url = prod_url
 
 class OptionalSlashRouter(SimpleRouter):
     def __init__(self):
