@@ -5,3 +5,5 @@ django-pygments==0.1
 django-markdownx==2.0.28
 markdown2==2.3.7
 django-taggit==1.1.0
+requests==2.22.0
+sendgrid==6.0.5
