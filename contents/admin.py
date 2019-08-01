@@ -5,7 +5,12 @@ from .models import Content
 
 @admin.register(Content)
 class ContentAdmin(MarkdownxModelAdmin):
-  class Media:
-    css = {
-      'all': ('markdownx.css', )
-    }
+    search_fields = ("title", "slug", "summary",)
+    list_display = (
+        "title",
+        "slug",
+        "date_created",
+    )
+
+    class Media:
+        css = {"all": ("markdownx.css",)}

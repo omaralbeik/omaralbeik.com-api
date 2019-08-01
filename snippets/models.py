@@ -25,14 +25,10 @@ class Snippet(models.Model):
     is_published = models.BooleanField(default=False)
     date_published = models.DateField(blank=True, null=True)
 
-    language = models.ForeignKey('ProgrammingLanguage', on_delete=models.CASCADE)
+    language = models.ForeignKey("ProgrammingLanguage", on_delete=models.CASCADE)
 
     objects = models.Manager()
     visible = SnippetManager()
 
-    def __str__(self):
-        desc = self.name if self.is_published else "[DRAFT] " + self.name
-        return "{} ({})".format(desc, self.language.name)
-
     class Meta:
-        ordering = ['-is_published', '-date_published', '-date_created']
+        ordering = ["-is_published", "-date_published", "-date_created"]

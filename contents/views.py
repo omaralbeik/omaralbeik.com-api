@@ -6,20 +6,20 @@ from . import models, serializers
 
 
 class ContentViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = models.Content.objects.all()
     serializer_class = serializers.ContentSerializer
-    filter_backends = (SearchFilter, )
-    search_fields = ('title', 'text', )
+    filter_backends = (SearchFilter,)
+    search_fields = ("title", "text",)
 
     def retrieve(self, request, pk=None):
-        try: # retrieve post by primary key
+        try:  # retrieve post by primary key
             pk = int(pk)
             content = get_object_or_404(self.get_queryset(), pk=pk)
             serializer = self.get_serializer(content)
             return Response(serializer.data)
 
-        except: # retrieve post by slug
+        except:  # retrieve post by slug
             content = get_object_or_404(self.get_queryset().filter(slug=pk))
             serializer = self.get_serializer(content)
             return Response(serializer.data)

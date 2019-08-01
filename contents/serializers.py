@@ -8,15 +8,10 @@ class ContentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Content
-        fields = (
-            'id',
-            'title',
-            'slug',
-            'image_url',
-            'text',
-            'html_text'
-        )
+        fields = ("id", "title", "slug", "image_url", "text", "html_text",)
 
     # return post's text as HTML
     def get_html_text(self, post):
-        return markdown2.markdown(post.text, extras=['target-blank-links', 'fenced-code-blocks'])
+        return markdown2.markdown(
+            post.text, extras=["target-blank-links", "fenced-code-blocks"]
+        )

@@ -7,17 +7,17 @@ from . import models, serializers
 
 
 class SnippetViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = models.Snippet.objects.all()
     serializer_class = serializers.SnippetSerializer
-    filter_backends = (SearchFilter, )
-    search_fields = ('name', 'summary', 'text', 'language__name', )
+    filter_backends = (SearchFilter,)
+    search_fields = ("name", "summary", "text", "language__name",)
 
     def get_snippet(self, request, pk=None):
-        try: # retrieve snippet by primary key
+        try:  # retrieve snippet by primary key
             pk = int(pk)
             return get_object_or_404(self.get_queryset(), pk=pk)
-        except: # retrieve snippet by slug
+        except:  # retrieve snippet by slug
             return get_object_or_404(self.get_queryset().filter(slug=pk))
 
     def get_queryset(self):
@@ -33,17 +33,17 @@ class SnippetViewSet(viewsets.ModelViewSet):
 
 
 class ProgrammingLanguageViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = models.ProgrammingLanguage.objects.all()
     serializer_class = serializers.ProgrammingLanguageSerializer
-    filter_backends = (SearchFilter, )
-    search_fields = ('name', )
+    filter_backends = (SearchFilter,)
+    search_fields = ("name",)
 
     def get_language(self, request, pk=None):
-        try: # retrieve language by primary key
+        try:  # retrieve language by primary key
             pk = int(pk)
             return get_object_or_404(self.get_queryset(), pk=pk)
-        except: # retrieve language by slug
+        except:  # retrieve language by slug
             return get_object_or_404(self.get_queryset().filter(slug=pk))
 
     def retrieve(self, request, pk=None):
@@ -53,7 +53,7 @@ class ProgrammingLanguageViewSet(viewsets.ModelViewSet):
 
     # detail route to return all snippets for a language
     # .../languages/[language_id]|[language_slug]/snippets
-    @detail_route(methods=['get'])
+    @detail_route(methods=["get"])
     def snippets(self, request, pk=None):
         language = self.get_language(request, pk)
         snippets = models.Snippet.visible.filter(language=language)

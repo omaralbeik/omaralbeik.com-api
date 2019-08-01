@@ -6,17 +6,17 @@ from . import models, serializers
 
 
 class PostViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = models.Post.objects.all()
     serializer_class = serializers.PostSerializer
-    filter_backends = (SearchFilter, )
-    search_fields = ('title', 'summary', 'text', 'tags__name', )
+    filter_backends = (SearchFilter,)
+    search_fields = ("title", "summary", "text", "tags__name",)
 
     def get_post(self, request, pk=None):
-        try: # retrieve post by primary key
+        try:  # retrieve post by primary key
             pk = int(pk)
             return get_object_or_404(self.get_queryset(), pk=pk)
-        except: # retrieve post by slug
+        except:  # retrieve post by slug
             return get_object_or_404(self.get_queryset().filter(slug=pk))
 
     def get_queryset(self):

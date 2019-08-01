@@ -9,8 +9,5 @@ class Content(models.Model):
     image_url = models.URLField(blank=True, null=True)
     date_created = models.DateField(auto_now_add=True)
 
-    def __str__(self):
-        return self.title
-
     class Meta:
-        ordering = ['-date_created']
+        ordering = ["-date_created"]

@@ -23,8 +23,5 @@ class Post(models.Model):
     objects = models.Manager()
     visible = PostManager()
 
-    def __str__(self):
-        return self.title if self.is_published else "[DRAFT] " + self.title
-
     class Meta:
-        ordering = ['-is_published', '-date_published', '-date_created', ]
+        ordering = ["-is_published", "-date_published", "-date_created"]

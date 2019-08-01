@@ -7,17 +7,17 @@ from . import models, serializers
 
 
 class TechnologyViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = models.Technology.objects.all()
     serializer_class = serializers.TechnologySerializer
-    filter_backends = (SearchFilter, )
-    search_fields = ('name', )
+    filter_backends = (SearchFilter,)
+    search_fields = ("name",)
 
     def get_technology(self, request, pk=None):
-        try: # retrieve technology by primary key
+        try:  # retrieve technology by primary key
             pk = int(pk)
             return get_object_or_404(self.get_queryset(), pk=pk)
-        except: # retrieve technology by slug
+        except:  # retrieve technology by slug
             return get_object_or_404(self.get_queryset().filter(slug=pk))
 
     def retrieve(self, request, pk=None):
@@ -27,7 +27,7 @@ class TechnologyViewSet(viewsets.ModelViewSet):
 
     # detail route to return all projects built using a technology
     # .../technologies/[technology_id]|[technology_slug]/projects
-    @detail_route(methods=['get'])
+    @detail_route(methods=["get"])
     def projects(self, request, pk=None):
         technology = self.get_technology(request, pk)
         porjects = models.Project.visible.filter(technologies__in=[technology])
@@ -37,17 +37,24 @@ class TechnologyViewSet(viewsets.ModelViewSet):
 
 
 class ProjectViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = models.Project.objects.all()
     serializer_class = serializers.ProjectSerializer
-    filter_backends = (SearchFilter, )
-    search_fields = ('name', 'summary', 'url_name', 'url', 'technologies__name', 'tags__name', )
+    filter_backends = (SearchFilter,)
+    search_fields = (
+        "name",
+        "summary",
+        "url_name",
+        "url",
+        "technologies__name",
+        "tags__name",
+    )
 
     def get_project(self, request, pk=None):
-        try: # retrieve project by primary key
+        try:  # retrieve project by primary key
             pk = int(pk)
             return get_object_or_404(self.get_queryset(), pk=pk)
-        except: # retrieve project by slug
+        except:  # retrieve project by slug
             return get_object_or_404(self.get_queryset().filter(slug=pk))
 
     def get_queryset(self):
