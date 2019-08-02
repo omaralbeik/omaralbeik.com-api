@@ -1,6 +1,7 @@
 from rest_framework import serializers
 import markdown2
 from .models import Post
+from omaralbeik import server_variables as sv
 from omaralbeik import urls
 
 
@@ -26,7 +27,7 @@ class PostSerializer(serializers.ModelSerializer):
 
     # return post's web URL.
     def get_website_url(self, post):
-        return "{}/blog/{}".format(urls.prod_url, post.slug)
+        return "{}/blog/{}".format(sv.CLIENT_PROD_URL, post.slug)
 
     # return post's text as HTML
     def get_html_text(self, post):

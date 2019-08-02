@@ -5,19 +5,21 @@ from django.views.static import serve
 
 from rest_framework.routers import SimpleRouter
 
-from blog import views as bv
-from projects import views as pv
-from snippets import views as sv
-from contents import views as cv
-from contact import views as ctv
+from blog import views as blogViews
+from projects import views as projectsViews
+from snippets import views as snippetsViews
+from contents import views as contentsViews
+from contact import views as contactViews
+
+from omaralbeik import server_variables as sv
+
+admin.sites.AdminSite.site_header = sv.ADMIN_HEADER
+admin.sites.AdminSite.site_title = sv.ADMIN_TITLE
+admin.sites.AdminSite.index_title = sv.ADMIN_PAGE_TITLE
+admin.sites.AdminSite.site_url = sv.CLIENT_PROD_URL
 
 app_name = "omaralbeik"
-prod_url = "https://omaralbeik.com"
 
-admin.sites.AdminSite.site_header = "Omar Albeik | Admin"
-admin.sites.AdminSite.site_title = "Omar Albeik"
-admin.sites.AdminSite.index_title = "Site Administration"
-admin.sites.AdminSite.site_url = prod_url
 
 class OptionalSlashRouter(SimpleRouter):
     def __init__(self):
@@ -26,13 +28,13 @@ class OptionalSlashRouter(SimpleRouter):
 
 
 router = OptionalSlashRouter()
-router.register(r"blog", bv.PostViewSet)
-router.register(r"projects", pv.ProjectViewSet)
-router.register(r"technologies", pv.TechnologyViewSet)
-router.register(r"snippets", sv.SnippetViewSet)
-router.register(r"languages", sv.ProgrammingLanguageViewSet)
-router.register(r"contents", cv.ContentViewSet)
-router.register(r"contact", ctv.MessageViewSet)
+router.register(r"blog", blogViews.PostViewSet)
+router.register(r"projects", projectsViews.ProjectViewSet)
+router.register(r"technologies", projectsViews.TechnologyViewSet)
+router.register(r"snippets", snippetsViews.SnippetViewSet)
+router.register(r"languages", snippetsViews.ProgrammingLanguageViewSet)
+router.register(r"contents", contentsViews.ContentViewSet)
+router.register(r"contact", contactViews.MessageViewSet)
 
 urlpatterns = [
     url(r"^markdownx/", include("markdownx.urls")),

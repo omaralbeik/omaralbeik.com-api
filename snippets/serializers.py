@@ -1,7 +1,7 @@
 from rest_framework import serializers
 import markdown2
 from .models import ProgrammingLanguage, Snippet
-from omaralbeik import urls
+from omaralbeik import server_variables as sv
 
 
 class ProgrammingLanguageSerializer(serializers.ModelSerializer):
@@ -34,7 +34,7 @@ class SnippetSerializer(serializers.ModelSerializer):
 
     # return snippet's web URL.
     def get_website_url(self, snippet):
-        return "{}/snippets/{}".format(urls.prod_url, snippet.slug)
+        return "{}/snippets/{}".format(sv.CLIENT_PROD_URL, snippet.slug)
 
     # return snippet's language.
     def get_language(self, snippet):
