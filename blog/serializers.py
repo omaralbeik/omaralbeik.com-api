@@ -2,13 +2,13 @@ from rest_framework import serializers
 import markdown2
 from .models import Post
 from omaralbeik import server_variables as sv
-from omaralbeik import urls
 
 
 class PostSerializer(serializers.ModelSerializer):
     html_text = serializers.SerializerMethodField()
     tags = serializers.SerializerMethodField()
     website_url = serializers.SerializerMethodField()
+    meta = serializers.SerializerMethodField()
 
     class Meta:
         model = Post
@@ -23,6 +23,7 @@ class PostSerializer(serializers.ModelSerializer):
             "date_published",
             "website_url",
             "tags",
+            "meta",
         )
 
     # return post's web URL.
@@ -39,3 +40,11 @@ class PostSerializer(serializers.ModelSerializer):
     def get_tags(self, post):
         return post.tags.all().values("name", "slug")
 
+    # return post's meta fields.
+    def get_meta(self, post):
+        return {
+            "title": post.title,
+            "description": post.summary,
+            "keywords": ", ".join([tag.name for tag in post.tags.all()]),
+            "canonical": self.get_website_url(post),
+        }

@@ -23,5 +23,8 @@ class Post(models.Model):
     objects = models.Manager()
     visible = PostManager()
 
+    def __str__(self):
+        return self.title
+
     class Meta:
         ordering = ["-is_published", "-date_published", "-date_created"]

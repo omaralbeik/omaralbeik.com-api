@@ -14,6 +14,7 @@ class SnippetSerializer(serializers.ModelSerializer):
     html_text = serializers.SerializerMethodField()
     language = serializers.SerializerMethodField()
     website_url = serializers.SerializerMethodField()
+    meta = serializers.SerializerMethodField()
 
     class Meta:
         model = Snippet
@@ -26,6 +27,7 @@ class SnippetSerializer(serializers.ModelSerializer):
             "website_url",
             "date_published",
             "language",
+            "meta",
         )
 
     # return snippet as HTML
@@ -40,3 +42,12 @@ class SnippetSerializer(serializers.ModelSerializer):
     def get_language(self, snippet):
         serializer = ProgrammingLanguageSerializer(snippet.language)
         return serializer.data
+
+    # return snippet's meta fields.
+    def get_meta(self, snippet):
+        return {
+            "title": snippet.name,
+            "description": snippet.summary,
+            "keywords": [snippet.language.name],
+            "canonical": self.get_website_url(snippet),
+        }
