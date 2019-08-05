@@ -35,7 +35,7 @@ class ProjectSerializer(serializers.ModelSerializer):
 
     # return project's web URL.
     def get_website_url(self, project):
-        return "{}/projects/".format(sv.CLIENT_PROD_URL)
+        return "{}/projects".format(sv.CLIENT_PROD_URL)
 
     # return project's tags.
     def get_tags(self, project):

@@ -27,7 +27,7 @@ class ContentSerializer(serializers.ModelSerializer):
 
     # return content's web URL.
     def get_website_url(self, content):
-        return "{}/{}/".format(sv.CLIENT_PROD_URL, content.slug)
+        return "{}/{}".format(sv.CLIENT_PROD_URL, content.slug)
 
     # return content's text as HTML
     def get_html_text(self, content):

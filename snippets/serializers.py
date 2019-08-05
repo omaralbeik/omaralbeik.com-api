@@ -36,7 +36,7 @@ class SnippetSerializer(serializers.ModelSerializer):
 
     # return snippet's web URL.
     def get_website_url(self, snippet):
-        return "{}/snippets/{}".format(sv.CLIENT_PROD_URL, snippet.slug)
+        return "{}/snippets?id={}".format(sv.CLIENT_PROD_URL, snippet.slug)
 
     # return snippet's language.
     def get_language(self, snippet):
