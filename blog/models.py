@@ -23,6 +23,8 @@ class Post(models.Model):
     objects = models.Manager()
     visible = PostManager()
 
+    related = models.ManyToManyField('Post', blank=True)
+
     def __str__(self):
         return self.title
 
