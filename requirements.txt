@@ -1,9 +1,8 @@
-django==2.2.3
-djangorestframework==3.9.4
-django-cors-headers==3.0.2
+django==2.2.6
+djangorestframework==3.10.3
+django-cors-headers==3.1.1
 django-pygments==0.3
 django-markdownx==2.0.28
 markdown2==2.3.8
 django-taggit==1.1.0
 requests==2.22.0
-sendgrid==6.0.5
