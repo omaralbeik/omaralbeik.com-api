@@ -24,9 +24,9 @@ class PostSerializer(serializers.ModelSerializer):
             "html_text",
             "date_published",
             "website_url",
+            "read_time",
             "tags",
             "meta",
-            "read_time",
         )
 
     # return post's web URL.
