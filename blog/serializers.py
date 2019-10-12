@@ -1,5 +1,6 @@
 from rest_framework import serializers
 import markdown2
+import readtime
 from .models import Post
 from omaralbeik import server_variables as sv
 
@@ -9,6 +10,7 @@ class PostSerializer(serializers.ModelSerializer):
     tags = serializers.SerializerMethodField()
     website_url = serializers.SerializerMethodField()
     meta = serializers.SerializerMethodField()
+    read_time = serializers.SerializerMethodField()
 
     class Meta:
         model = Post
@@ -24,6 +26,7 @@ class PostSerializer(serializers.ModelSerializer):
             "website_url",
             "tags",
             "meta",
+            "read_time",
         )
 
     # return post's web URL.
@@ -48,3 +51,7 @@ class PostSerializer(serializers.ModelSerializer):
             "keywords": ", ".join([tag.name for tag in post.tags.all()]),
             "canonical": self.get_website_url(post),
         }
+    
+    # return post's estimated read time.
+    def get_read_time(self, post):
+        return readtime.of_markdown(post.text).text
