@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from rest_framework import viewsets, permissions
-from rest_framework.decorators import detail_route
+from rest_framework.decorators import action
 from rest_framework.filters import SearchFilter
 from . import models, serializers
 
@@ -27,7 +27,7 @@ class TechnologyViewSet(viewsets.ModelViewSet):
 
     # detail route to return all projects built using a technology
     # .../technologies/[technology_id]|[technology_slug]/projects
-    @detail_route(methods=["get"])
+    @action(detail=True, methods=["get"])
     def projects(self, request, pk=None):
         technology = self.get_technology(request, pk)
         porjects = models.Project.visible.filter(technologies__in=[technology])

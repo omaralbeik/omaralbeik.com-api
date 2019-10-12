@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from rest_framework import viewsets, permissions
-from rest_framework.decorators import detail_route
+from rest_framework.decorators import action
 from rest_framework.filters import SearchFilter
 from . import models, serializers
 
@@ -53,7 +53,7 @@ class ProgrammingLanguageViewSet(viewsets.ModelViewSet):
 
     # detail route to return all snippets for a language
     # .../languages/[language_id]|[language_slug]/snippets
-    @detail_route(methods=["get"])
+    @action(detail=True, methods=["get"])
     def snippets(self, request, pk=None):
         language = self.get_language(request, pk)
         snippets = models.Snippet.visible.filter(language=language)

@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from rest_framework import viewsets, permissions
-from rest_framework.decorators import detail_route
+from rest_framework.decorators import action
 from rest_framework.filters import SearchFilter
 from . import models, serializers
 
@@ -33,7 +33,7 @@ class PostViewSet(viewsets.ModelViewSet):
 
     # detail route to return related posts for a post
     # .../blog/[post_id]|[post_slug]/related
-    @detail_route(methods=["get"])
+    @action(detail=True, methods=["get"])
     def related(self, request, pk=None):
         post = self.get_post(request, pk)
         page = self.paginate_queryset(post.related.all())
