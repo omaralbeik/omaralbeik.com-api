@@ -5,12 +5,31 @@ from .models import Post
 from omaralbeik import server_variables as sv
 
 
+class PostSummarySerializer(serializers.ModelSerializer):
+    read_time = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Post
+        fields = [
+            "id",
+            "title",
+            "slug",
+            "cover_image_url",
+            "summary",
+            "date_published",
+            "read_time",
+        ]
+
+    # return post's estimated read time.
+    def get_read_time(self, post):
+        return readtime.of_markdown(post.text).text
+
+
 class PostSerializer(serializers.ModelSerializer):
     html_text = serializers.SerializerMethodField()
     tags = serializers.SerializerMethodField()
     website_url = serializers.SerializerMethodField()
     meta = serializers.SerializerMethodField()
-    read_time = serializers.SerializerMethodField()
 
     class Meta:
         model = Post
@@ -24,7 +43,6 @@ class PostSerializer(serializers.ModelSerializer):
             "html_text",
             "date_published",
             "website_url",
-            "read_time",
             "tags",
             "meta",
         )
@@ -51,7 +69,3 @@ class PostSerializer(serializers.ModelSerializer):
             "keywords": ", ".join([tag.name for tag in post.tags.all()]),
             "canonical": self.get_website_url(post),
         }
-    
-    # return post's estimated read time.
-    def get_read_time(self, post):
-        return readtime.of_markdown(post.text).text

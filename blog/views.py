@@ -13,6 +13,12 @@ class PostViewSet(viewsets.ModelViewSet):
     filter_backends = (SearchFilter,)
     search_fields = ("title", "summary", "text", "tags__name",)
 
+    def get_serializer_class(self):
+        if self.action == "list":
+            return serializers.PostSummarySerializer
+        else:
+            return serializers.PostSerializer
+
     def get_post(self, request, pk=None):
         try:  # retrieve post by primary key
             pk = int(pk)
@@ -37,5 +43,5 @@ class PostViewSet(viewsets.ModelViewSet):
     def related(self, request, pk=None):
         post = self.get_post(request, pk)
         page = self.paginate_queryset(post.related.all())
-        serializer = serializers.PostSerializer(page, many=True)
+        serializer = serializers.PostSummarySerializer(page, many=True)
         return self.get_paginated_response(serializer.data)
